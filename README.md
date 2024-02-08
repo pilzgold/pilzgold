@@ -1,0 +1,6 @@
+- 👋 Hi, I’m @pilzgold
+- 👀 I’m interested in GameDevelopment
+- 🌱 I’m currently learning C# and C++
+- 📫 How to reach me: via my discord: [pilzgold]
+- 😄 Pronouns: He/Him
+- ⚡ Fun fact: I always play Games on my phone and on my Nintendo simultaneously lol + I use "XD" way to often in sentences
