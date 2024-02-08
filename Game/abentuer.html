@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abenteuer</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background: #2b285a;
+            background-image: url("stuff/main2.jpg")
+        }
+        .alterBildschirm{
+            font-size: 20px;
+            font-weight: bold;
+            font-family: monospace, courier, terminal;
+            color: #000000;
+            
+
+            width: 800px; height: 500px;
+            background: #484092e1;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px auto;
+            box-shadow: inset -1px 2px 10px 5px rgba(43, 37, 100, 0.897);
+        }
+    </style>
+    <audio controls>
+        <source src="stuff/main2.mp3">
+    </audio>
+</head>
+<body>
+    <p class="alterBildschirm" id="monitor">
+    </p>
+    <script>
+        var geschichte = {
+            situationen: [
+                {
+                id: 0,
+                auswahlText: "Textrpg",
+                "text":
+                "<br>HeyHo<br><br>Willkommen zu meinem Abschluss Projekt!",
+                ziele:[1]
+                },  
+                {
+                id: 1,
+                auswahlText: "weiter --->",
+                text:
+                "Frage1:<br>Welches der unten genannten Tiere ist schwerer?",
+                ziele:[2,3,4]
+                },
+               {
+                id: 2,
+                auswahlText: "Fliege",
+                text:
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 3,
+                auswahlText: "Giraffe",
+                text:
+                "Leider falsch",
+                ziele:[5]
+              },
+              {
+                id: 4,
+                auswahlText: "Waal",
+                text:
+                "Frage2:<br>Wie lange dauert eine Schwangerschaft?",
+                ziele:[6,7,8]
+              },
+              {
+                id: 6,
+                auswahlText: "3Monate",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 7,
+                auswahlText: "40wochen",
+                text: 
+                "Frage3:<br>Wie heißt der Bundespräsident Alexander Vanderbellen?",
+                ziele:[9,10,11]
+              },
+              {
+                id: 8,
+                auswahlText: "28wochen",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 9,
+                auswahlText: "Alexander",
+                text: 
+                "Frage4:<br>Wie viele Einwohner hat Österreich?",
+                ziele:[12,13,14]
+              },
+              {
+                id: 10,
+                auswahlText: "Xavier",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 11,
+                auswahlText: "Thomas",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 12,
+                auswahlText: "4mio",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 13,
+                auswahlText: "9mio",
+                text: 
+                "Frage5:<br>Welches dieser Schulfächer ist am coolsten?",
+                ziele:[15,16,17]
+              },
+              {
+                id: 14,
+                auswahlText: "10mio",
+                text: 
+                "Frage5:<br>Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 15,
+                auswahlText: "MATHEMATIK",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 16,
+                auswahlText: "MEDIENTECHNIK",
+                text: 
+                "Frage6:<br>Wie viele Schüler hat die Schule?",
+                ziele:[18,19,20]
+              },
+              {
+                id: 17,
+                auswahlText: "SOFTWARE ENTWICKLUNG",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 18,
+                auswahlText: "350",
+                text: 
+                "Frage7:<br>Wie viele Herr der Ringe teile gibt es?",
+                ziele:[21,22,23]
+              },
+              {
+                id: 19,
+                auswahlText: "69",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 20,
+                auswahlText: "420",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 21,
+                auswahlText: "6",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 22,
+                auswahlText: "2",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 23,
+                auswahlText: "3",
+                text: 
+                "Frage8:<br>Wann passierte Pearl Harbor?",
+                ziele:[24,27,26]
+              },
+              {
+                id: 24,
+                auswahlText: "1940",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 26,
+                auswahlText: "1941",
+                text: 
+                "Frage9:<br>Jetzt ein sehr schwieriges Rätsel:<br>Atemlos lebt es, Kalt wie der Tod schwebt es, Kennt keinen Durst, Dennoch trinkt es, Trägt kein Kättenhembd, doch nie klingt es. Was bin ich",
+                ziele:[28,29,30]
+              },
+              {
+                id: 27,
+                auswahlText: "1944",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 28,
+                auswahlText: "Fisch",
+                text: 
+                "Frage10:<br>Sind Karotten gut für die Augen?",
+                ziele:[31,32,33]
+              },
+              {
+                id: 29,
+                auswahlText: "Katze",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 30,
+                auswahlText: "Wahl",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 31,
+                auswahlText: "Ja Natürlich",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 32,
+                auswahlText: "Nein die Briten haben sich das Ausgedacht im 2ten Weltkrieg um die Deutschen zu verwirren",
+                text: 
+                "Gut gemacht, du hast es geschafft. Zu aller erst war es ein absolut grandioses Jahr in MEDT und ich hoffe das dass nächste genauso schön und toll wird. Als nächstes hoffe ich das du wirklich spaß hierbei hattest und außerdem hoffe ich das du mies viel Erfolg noch weiter hier haben wirst.<br>Bitte geh auf die nächste Seite.",
+                ziele:[34]
+              },
+              {
+                id: 33,
+                auswahlText: "Safe",
+                text: 
+                "Leider Falsch",
+                ziele:[5]
+              },
+              {
+                id: 34,
+                auswahlText: "Hier weiter",
+                text: 
+                "Nächste Seite hehehe",
+                ziele:[35]
+              },
+              {
+                id: 35,
+                auswahlText: "weiter XD",
+                text: 
+                "nächste Seite lmao",
+                ziele:[36]
+              },
+              {
+                id: 36,
+                auswahlText: "Weiiiiiiter!!!!!",
+                text: 
+                "Kann es sein das, dass jetzt schon das Ende ist? Ich denke. Ich hatte sehr viel spaß beim programmieren hier.",
+                ziele:[37]
+              },
+              {
+                id: 37,
+                auswahlText: "Schnell!",
+                text: 
+                "Du gehst und gehts immer weiter den kleinen schmalen Weg entlang, nach einiger Zeit kommst du an eine Weg Gabelung. (Vorsicht ich würde weise wählen XD)",
+                ziele:[38,39]
+              },
+              {
+                id: 38,
+                auswahlText: "rechts",
+                text: 
+                "Eine wilde Bestie springt dich an und zerfleischt dich",
+                ziele:[5]
+              },
+              {
+                id: 39,
+                auswahlText: "links",
+                text: 
+                "Gut gemacht, du gehst also weiter und es wird dunkler und dunkler. Du wirst immer müder und müder, was machst du nun? (wähle weise)",
+                ziele:[40,41,42]
+              },
+              {
+                id: 40,
+                auswahlText: "weiter gehen",
+                text: 
+                "Du gehst also weiter und nach schon kurzer zeit werden deine Beine immer schwächer und schwächer und nach kurzer Zeit brichst du zusammen und fällst in Unmacht.",
+                ziele:[5]
+              },
+              {
+                id: 41,
+                auswahlText: "nach rechst in den Wald gehen und einen Platz zum schlafen suchen",
+                text: 
+                "du gehst und gehst und nach kurzer zeit findest du eine Lichtung und setzt dich auf einen kleinen Baumstamm und schläfst ein",
+                ziele:[5]
+              },
+              {
+                id: 42,
+                auswahlText: "auf dem Weg das Lager aufschlagen",
+                text: 
+                "du legst also deinen Schlafsack auf den Boden und legst dich schlafen",
+                ziele:[43]
+              },
+              {
+                id: 43,
+                auswahlText: "aufwachen",
+                text: 
+                "du wachst auf und hörst das wundervolle zwitchern der Vögel und das plätchern von Wasser. Du stehst auf und trinkst erstmal etwas aus deiner Wasserflasche jetzt hast du nur mehr 0 Wasserflaschen",
+                ziele:[44]
+              },
+              {
+                id: 44,
+                auswahlText: "weiter gehen",
+                text: 
+                "du gehst weiter und nach einer guten Stunde kommst du an ein Tor auf dem die Zahl 32 steht",
+                ziele:[45,46]
+              },
+              {
+                id: 45,
+                auswahlText: "Tor öffnen",
+                text: 
+                "du öffnest das Tor und du hörst ein leises aber durchaus hörbares flüstern",
+                ziele:[47]
+              },
+              {
+                id: 46,
+                auswahlText: "über das Tor springen",
+                text: 
+                "du springst über das Tor und auf einmal öffnet sich ein Loch im Boden und du fällst tiefer und tiefer",
+                ziele:[5]
+              },
+              {
+                id: 47,
+                auswahlText: "weiter gehen",
+                text: 
+                "du gehts also weiter und nach einer Weile siehst du ca. 7km von dir entfernt Rauch aufsteigen",
+                ziele:[48]
+              },
+              {
+                id: 48,
+                auswahlText: "zum Rauch gehen",
+                text: 
+                "du gehst also weiter Richtung Rauch. Während du also so vor dich hin gehst fällt dir auf das du garnicht mehr weist wieso du eigentlich auf diesem Weg hier gehst. Außerdem fällt dir auf das du die letzte Zeit nichts mehr gegessen hast. Was machst du also.",
+                ziele:[49,50,51]
+              },
+              {
+                id: 49,
+                auswahlText: "über mein Leben nachdenken",
+                text: 
+                "während du also so da stehst und darüber nachdenkst wieso du eigentlich hier bist hörst du plötzlich neben dir in einem Gebüsch ein Knistern, in der nächsten Sekunde spürst du nur mehr einen Stechenden Schmerz und dir wird Schwarz vor Augen",
+                ziele:[5]
+              },
+              {
+                id: 50,
+                auswahlText: "zurück gehen",
+                text: 
+                "du drehst dich um und willst den ersten Fuß in diese Richting machen aber dann plötzlich hörst du wieder diese Stimme flüstern, sie sagt: dreh dich um hihihi",
+                ziele:[52,53]
+              },
+              {
+                id: 51,
+                auswahlText: "etwas Essen",
+                text: 
+                "du holst einen leckeren apfel aus der Tasche und isst ihn",
+                ziele:[54]
+              },
+              {
+                id: 52,
+                auswahlText: "umdrehen",
+                text: 
+                "du drehst dich wieder um und plötzlich steht direkt vor dir ein alter Mann der dich einfach nur angrinnst :), die Sekunde darauf spürst du einen stechenden Schmerz und dir wird Schwarz vor Augen",
+                ziele:[5]
+              },
+              {
+                id: 53,
+                auswahlText: "nicht umdrehen",
+                text: 
+                "du drehst dich nciht um und gehst weiterhin zurück, nach gut 100m hörst du ein leises   psst   hinter dir",
+                ziele:[54,55]
+              },
+              {
+                id: 54,
+                auswahlText: "weiter gehen",
+                text: 
+                "du gehst weiter und weiter bis du bei einem Tor ankommst, auf dem Tor steht die Nummer 795. Was machst du?",
+                ziele:[56,57]
+              },
+              {
+                id: 55,
+                auswahlText: "umdrehen",
+                text: 
+                "du drehst dich wieder um und plötzlich steht direkt vor dir ein alter Mann der dich einfach nur angrinnst :), die Sekunde darauf spürst du einen stechenden Schmerz und dir wird Schwarz vor Augen",
+                ziele:[5]
+              },
+              {
+                id: 56,
+                auswahlText: "aufmachen und durchgehen",
+                text: 
+                "das Tor lässt dich nicht hindurch und unter dir öffnet isch ein Loch und verschlingt dich",
+                ziele:[5]
+              },
+              {
+                id: 57,
+                auswahlText: "darüber springen",
+                text: 
+                "du springst wie ein richtiger Raudi über das Tor. Du stehst nun auf der anderen Seite des Tores und du hörst wieder eine leise Stimmen: dreh dich nicht um",
+                ziele:[59,60]
+              },{
+                id: 58,
+                auswahlText: "etwas zu Essen aus der Tasche holen",
+                text: 
+                "du holst etwas zu Essen aus deiner Tasche um genau zu sein einen roten Apfel, du beißt genüsslich hinein und genießt in.",
+                ziele:[61]
+              },
+              {
+                id: 59,
+                auswahlText: "umdrehen",
+                text: 
+                "du drehst dich um aber hinter dir ist nichts, du betrachtest die Umgebung ganz genau und da fällt dir auf das Tor über welches du gerade gesprungen bist ist nicht mehr da. Was machst du?",
+                ziele:[62,63]
+              },
+              {
+                id: 60,
+                auswahlText: "nicht umdrehen und weiter gehen",
+                text: 
+                "du drehst dich nicht um und gehst weiter. Plötzlich spürst du ein schmerzhaftes Stechen in deinem Rücken und dir wird schwarz vor Augen",
+                ziele:[5]
+              },
+              {
+                id: 61,
+                auswahlText: "weiter gehen",
+                text: 
+                "du gehst weiter und nach schon kurzer Zeit wird dir sehr sehr übel und du übergibst dich und fällst in Ohnmacht",
+                ziele:[5]
+              },
+              {
+                id: 62,
+                auswahlText: "wieder richtung Rauch gehen",
+                text: 
+                "du drehst also um und gehst wieder richtung Rauch, nach etwas längerem gehen bemerkst du erst das neben dir eine junge Frau geht",
+                ziele:[64,65,66]
+              },
+              {
+                id: 63,
+                auswahlText: "wieder in die andere Richtung gehen",
+                text: 
+                "als du dich erneut umdrehst steht vor dir ein ältere Mann er sieht dich nur an. Die Sekunde darauf wird dir schwarz vor Augen und du fällst um.",
+                ziele:[5]
+              },
+              {
+                id: 64,
+                auswahlText: "ignorieren",
+                text: 
+                "du ignorierst die Frau und gehst weiter. Nach nur kurzer Zeit bemerkst du das sich die Frau in Luft aufgelöst hat.",
+                ziele:[70,71]
+              },
+              {
+                id: 65,
+                auswahlText: "ansprechen",
+                text: 
+                "ehe du etwas sagen kannst kommt dir die Frau zuvor und fragt:<br><br>Hallo Paul, ich bin Mia.",
+                ziele:[67,68,69]
+              },
+              {
+                id: 66,
+                auswahlText: "abstechen",
+                text: 
+                "du ziehst das Messer welches an deinem Gürtel hängt und rammst es ihr in die Brust. In der selben Sekunde hebt sie ihre Hand und rammt diese durch deinen Bauch. Dir wird Schwarz vor Augen und fällst in Ohnmacht",
+                ziele:[5]
+              },
+              {
+                id: 67,
+                auswahlText: "Hallo? Wer bist du?",
+                text: 
+                "hihi ich bin die Stimme die manchmal mit dir gesprochen hat.",
+                ziele:[70]
+              },
+              {
+                id: 68,
+                auswahlText: "Woher kennst du meinen Namen?",
+                text: 
+                "Ich bin von einer sehr wichitgen Person zu dir geschickt worden um dich auf deinem Abenteuer zu unterstützen",
+                ziele:[70,71]
+              },
+              {
+                id: 69,
+                auswahlText: "Suiiii",
+                text: 
+                "SUIIIIIIIIII",
+                ziele:[70]
+              },
+              {
+                id: 70,
+                auswahlText: "aaaahaaaa",
+                text: 
+                "Du akzeptierst was Mia zusagen hat und gehts an ihrer Seite weiter.",
+                ziele:[71]
+              },
+              {
+                id: 71,
+                auswahlText: "welches Abenteuer",
+                text: 
+                "Achso hast du es etwa vergessen?",
+                ziele:[72,73]
+              },
+              {
+                id: 72,
+                auswahlText: "Ne ich verarsch dich nur LOL",
+                text: 
+                "Jaja du brauchst hier nicht so frech werden. Ich bin ja anscheinend die einzige die noch weis was du hier zu suchen hast",
+                ziele:[731]
+              },
+              {
+                id: 731,
+                auswahlText: "entschuldigung ich wollte nicht so Frech rüber kommen",
+                text: 
+                "Ach ist nicht schlimm. Also ich erklärs dir. Ein alter Zauberer ist in Neverwrite zu uns an den Tisch gekommen und hat dir einfach einen Brief gegeben in welchen Stand:<br><br>So PaUl Du SuChSt AlSo DeIn WeIhNaChTs GeScHeNk? GeH nAcH mOrToNiA uNd Du WiRsT fInDeN wOnAcH dU sUcHsT",
+                ziele:[74]
+              },
+              {
+                id: 73,
+                auswahlText: "Ja sry hab ich vergessen",
+                text: 
+                "Ach ist nicht schlimm. Also ich erklärs dir. Ein alter Zauberer ist in Neverwrite zu uns an den Tisch gekommen und hat dir einfach einen Brief gegeben in welchen Stand:<br><br>So PaUl Du SuChSt AlSo DeIn WeIhNaChTs GeScHeNk? GeH nAcH mOrToNiA uNd Du WiRsT fInDeN wOnAcH dU sUcHsT",
+                ziele:[74]
+              },
+              {
+                id: 74,
+                auswahlText: "Ahhhh ok?",
+                text: 
+                "Ja und naja wir holen uns hald dein Geschenk",
+                ziele:[75]
+              },
+              {
+                id: 75,
+                auswahlText: "Na dann auf gehts, lass uns keine Zeit verschwenden",
+                text: 
+                "Du und Mia machen sich also weiter auf den Weg richtung Mortonia",
+                ziele:[76]
+              },
+              {
+                id: 76,
+                auswahlText: "weiter gehen",
+                text: 
+                "Während ihr so den Weg entlang geht fällt dir auf das du zwar weißt was du tun musst, du jedoch nicht weißt wie du zu diesem Weg hier gekommen bist",
+                ziele:[997,77]
+              },
+              {
+                id: 77,
+                auswahlText: "ignorieren",
+                text: 
+                "Du ignorierst es also und gehst mit ihr weiter nach Mortonia",
+                ziele:[791]
+              },
+              {
+                id: 78,
+                auswahlText: "Mia abstechen",
+                text: 
+                "du zückst wieder dein Messer und rammst es so schnell es geht in Mias Brust, sie stößt einen gewaltigen Schrei aus welcher dich mehrere Meter weit zurück stoßt. Sie steht nun mit dem Messer in der Brust vor dir und sieht dich grinnsend an",
+                ziele:[79,80,81]
+              },
+              {
+                id: 791,
+                auswahlText: "Mia ansprechen",
+                text: 
+                "ehe du versuchst Mia anzusprechen bemerkst du wie Mia einen gewaltigen Schrei ausstößt und ein Messer in deine Richtung wirft",
+                ziele:[83,82]
+              },
+              {
+                id: 79,
+                auswahlText: "M...M...Mia?",
+                text: 
+                ":)",
+                ziele:[80,81]
+              },
+              {
+                id: 80,
+                auswahlText: "weglaufen",
+                text: 
+                "Du nimmst die Beine in die Hand und läufst einfach weg ohne nach hinten zu gucken.",
+                ziele:[84]
+              },
+              {
+                id: 81,
+                auswahlText: "einen Stock am Wegesrand aufheben und Mia nochmal abstechen",
+                text: 
+                "Du hebst einen Stock auf welcher am Rand des Weges liegt und rammst diesen nochmal Mia in die Brust, sie nimmt das Messer welches in ihrer Brust steckt, zieht es raus und wirft es in deine Richtung",
+                ziele:[82,83,80]
+              },
+              {
+                id: 82,
+                auswahlText: "versuchen es episch in der Luft zu fangen",
+                text: 
+                "du versuchst das Messer mid Air zu fangen, jedoch verkackst du und das Messer fliegt durch deine Hand hindurch",
+                ziele:[80]
+              },{
+                id: 83,
+                auswahlText: "weg ducken",
+                text: 
+                "du duckst dich unter dem Messer weg, du siehst nur mehr wie Mia in deine Richtung sprinted. die Sekunde darauf spürst du nur mehr einen stechenden Schmerz im Bauch und fällst in Ohnmacht",
+                ziele:[5]
+              },
+              {
+                id: 84,
+                auswahlText: "weiter Rennen",
+                text: 
+                "du rennst weiter und weiter und nach ca. 500m werden deine Beine schwächer und geben nach du legst dich auf den Boden voller erschöpfung und liegst einfach so da. Als du wieder aufstehst bemerkst du vor dir ein Tor auf welchem die Nummer 975",
+                ziele:[85,86]
+              },
+              {
+                id: 85,
+                auswahlText: "liegen bleiben",
+                text: 
+                "du bleibst liegen und hoffst einfach nur das Mia dich nicht holen kommt. Nach nicht alzu kurzer Zeit schläfst du ein",
+                ziele:[88]
+              },
+              {
+                id: 86,
+                auswahlText: "durchs Tor gehen",
+                text: 
+                "du gehst ganz normal durch das Tor hindurch. Es passiert nichts. du drehst dich um um zu checken ob eh ncihts in deiner nähe ist um dich kaltblütig zu ermorden. Als du dich wieder umdrehst bemerkst du vor dir ein gift grün schimmerndes Portal",
+                ziele:[89,90]
+              },
+              {
+                id: 87,
+                auswahlText: "über das Tor springen",
+                text: 
+                "Du springst über das Tor. Es passiert nichts. du drehst dich um um zu checken ob eh ncihts in deiner nähe ist um dich kaltblütig zu ermorden. Als du dich wieder umdrehst bemerkst du vor dir ein gift grün schimmerndes Portal",
+                ziele:[89,90]
+              },
+              {
+                id: 88,
+                auswahlText: "aufstehen",
+                text: 
+                "du stehst auf und plötzlich erscheint vor dir ein giftgrün schimmerndes Portal",
+                ziele:[89,90]
+              },
+              {
+                id: 89,
+                auswahlText: "hindurch gehen",
+                text: 
+                "Du begibst dich durch das Portal, während du hindurch gehst hörst du hinter dir nur das schreien von Mia. Die Sekunde daruaf teleportierst du dich weg und alles ist Schwarz für einen Moment",
+                ziele:[91]
+              },
+              {
+                id: 90,
+                auswahlText: "weiter in richtung Mortonia gehen",
+                text: 
+                "Du gehst also am Portal vorbei jedoch sagt dir etwas in dir Nein ich muss da durch gehen",
+                ziele:[89]
+              },
+              {
+                id: 91,
+                auswahlText: "Augen öffnen",
+                text: 
+                "Du riechts etwas sehr ekelhaftes wie den Kot von einem Tier oder so und wie du deine Augen öffnest bemerkst du das überall um dich herum Leute stehen und du in einem Schweinestall sitzt. Die Leute um dich herum Kichern und Kichern",
+                ziele:[92,93]
+              },
+              {
+                id: 92,
+                auswahlText: "fragen was denn alle haben und ob sie noch nie ein gesundes Schlammbad gesehen hätten",
+                text: 
+                "die Leute gucken dich alle ganz verdutzt an aber sie gehen alle nach und nach wieder. Du siehst dich um, um zu checken wo du jetzt bist und das erste was dir ins Auge fällt ist das rießen Schild auf einer Taverne vor dir wo oben sthet:<br><br>Taverne von Mortonia<br>das wackere Wildschwein",
+                ziele:[94]
+              },
+              {
+                id: 93,
+                auswahlText: "einfach aufstehen und gehen",
+                text: 
+                "die Leute gucken dich alle ganz verdutzt an aber sie gehen alle nach und nach wieder. Du siehst dich um, um zu checken wo du jetzt bist und das erste was dir ins Auge fällt ist das rießen Schild auf einer Taverne vor dir wo oben sthet:<br><br>Taverne von Mortonia<br>das wackere Wildschwein",
+                ziele:[94]
+              },
+              {
+                id: 94,
+                auswahlText: "hinein gehen",
+                text: 
+                "Du begibst dich also nun in die Taverne und du hörst schon die wunderschöne Musik die von einer Gruppe Barden gespielt wird, das Gelächter der vielen Leute ist auch nicht zu überhöhren, du suchst dir einen freien Platz und genießt einfach nur mal das sitzen",
+                ziele:[95]
+              },
+              {
+                id: 95,
+                auswahlText: "etwas zu trinken bestellen",
+                text: 
+                "du rufst einen Kellner zu deinem Tisch, es ist ein junger mitte 20jähriger Halb Elf mit langen blonden Haar und braunen Augen<br><br>Was möchten sie zu trinken werter Herr",
+                ziele:[96,97,98,99]
+              },
+              {
+                id: 96,
+                auswahlText: "Bitte für mich das beste Ale das diese wunderbare Stadt anzubieten hat",
+                text: 
+                "Du bestellst dir dein Getränk und nach schon kurzer Zeit bringt es der Kellner zu dir",
+                ziele:[100]
+              },
+              {
+                id: 97,
+                auswahlText: "Ja für mich ein Wasser mit ner scheibe Zitrone darin bitte",
+                text: 
+                "Du bestellst dir dein Getränk und nach schon kurzer Zeit bringt es der Kellner zu dir",
+                ziele:[100]
+              },
+              {
+                id: 98,
+                auswahlText: "Bitte für mich eines der teuersten Biere welche sie da haben",
+                text: 
+                "Du bestellst dir dein Getränk und nach schon kurzer Zeit bringt es der Kellner zu dir",
+                ziele:[100]
+              },
+              {
+                id: 99,
+                auswahlText: "ein Bier und einen Weißwen bitte du Knecht",
+                text: 
+                "Du bestellst dir dein Getränk und nach schon kurzer Zeit bringt es der Kellner zu dir",
+                ziele:[100]
+              },
+              {
+              id: 100,
+              auswahlText: "trinken und chillen",
+              text:
+              "du trinkst genüsslich dein Getränk und genießt dein Leben, plötzlich setzt sich eine dubiose Gestallt vor dich und stellt dir ein Packet auf den Tisch",
+              ziele:[101]
+              },
+              {
+              id: 101,
+              auswahlText: "es öffnen",
+              text:
+              "du öffnest das Packet und in dem Packet liegt ein Zettel, auf dem Zettel steht?",
+              ziele:[102]
+              },
+              {
+              id: 102,
+              auswahlText: "weiter XD",
+              text:
+              "weiter",
+              ziele:[103]
+              },
+              {
+              id: 103,
+              auswahlText: "weiter hehe",
+              text:
+              "Weiter mit der Story geht es in Part2!!",
+              ziele:[104]
+              },
+              {
+              id: 104,
+              auswahlText: "Das Ende?",
+              text:
+              "Ja das ist das Ende, Viel Spaß beim erneuten spielen XD (wenn es irgendwelche bugs gibt bitte mir sagen XD)",
+              ziele:[105]
+              },
+              {
+              id: 105,
+              auswahlText: "End",
+              text:
+              "End",
+              ziele:[1]
+              },
+              //////////////////////////////////////////Mia
+              {
+                id: 997,
+                auswahlText: "mit Mia sprechen",
+                text: 
+                "Was gibts?",
+                ziele:[998]
+              },
+              {
+                id: 998,
+                auswahlText: "wie sind wir eigentlich hier her gekommen",
+                text: 
+                "Mia grinnst :), Ach du Dummerchen wir sind am Tor 976 vorbeigegangen und dann sind wir hald hier am Weg angekommen. Außerdem solltest du nciht so viele Fragen stellen hihi",
+                ziele:[999,77]
+              },
+              {
+                id: 999,
+                auswahlText: "nachfragen",
+                text: 
+                "ICH HABE GESAGT DU SOLLST NICHT SO VIELE FRAGEN STELLEN. ups entschuldigung hihi",
+                ziele:[77,78]
+              },
+              //////////////////////////////////////////
+              {
+                id: 5,
+                auswahlText: "zurück zum Anfang",
+                text: 
+                "ROFL",
+                ziele:[1]
+              },
+              //////////////////////////////////////////
+            ]
+        };
+        eineSituation(0);
+        function findeAuswahl(gesuchteId){
+            for (var i=0; i<geschichte.situationen.length; i++){
+                if(geschichte.situationen[i].id == gesuchteId ){
+                    return geschichte.situationen[i].auswahlText;
+                }
+            }
+        }
+        
+        function eineSituation(gesucht){
+            for(var j = 0; j< geschichte.situationen.length; j++){
+                if(geschichte.situationen[j].id == gesucht){
+                    var text = geschichte.situationen[j].text + "<br><br>";
+                    anzahlElemente = geschichte.situationen[j].ziele.length;
+                    for(var i=0; i<anzahlElemente;i++){
+                        var geheZu = geschichte.situationen[j].ziele[i];
+                        var geheZuText = findeAuswahl(geheZu);
+                        text = text + 
+                        "<div onclick=\"eineSituation(" + geheZu + ");\"" + ">> " +
+                            geheZuText + "</div>"
+                    }
+                    break;
+                }
+            }
+            monitor.innerHTML = '<br>>' + text + '<br>'
+        }
+ </script>
+</body>
+</html>
